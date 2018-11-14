@@ -1,0 +1,36 @@
+2018-11-02 20:21:49,259: [INFO]: PATCH /api/v1/apps/metadata/exporters/FmAuto-Monitor-Ex-a62e323b-0504-4be9-8962-1315f5aafb65 (10.115.181.191) Request Body:
+{"alias": "FmAuto-Monitor-Ex-a62e323b-0504-4be9-8962-1315f5aafb65", "destination": {"ipv4Address": "10.115.181.191"}, "monitor": {"timeout": 60}}
+
+2018-11-02 20:21:49,340: [INFO]: PATCH /api/v1/vports/FmAuto-Vport-HC2_-d854cc7f-bdea-4edd-81a7-7681bc31377f (10.115.181.191) Request Body:
+{"gsGroup": "GSGRP_65", "alias": "FmAuto-Vport-HC2_-d854cc7f-bdea-4edd-81a7-7681bc31377f", "deferredBinding": true, "saApfProfile": "FmAuto-Sapf-HC2_A-c6a03463-fe28-497d-8d0d-d1307471b5fb", "metadataMonitoring": {"action": "enable", "exporters": ["FmAuto-Monitor-Ex-a62e323b-0504-4be9-8962-1315f5aafb65"]}}
+
+2018-11-02 20:21:49,495: [INFO]: POST /api/v1/apps/metadata/applicationProfiles (10.115.181.191) Request Body:
+{"applications": [{"attributes": [{"name": "ancount", "value": "true"}, {"name": "arcount", "value": "true"}, {"name": "opcode", "value": "true"}, {"name": "qdcount", "value": "true"}], "name": "dns"}, {"attributes": [{"name": "content", "value": "true"}, {"name": "header-name", "value": "true"}, {"name": "ntlm-user", "value": "true"}, {"name": "start-time", "value": "true"}, {"name": "uri", "value": "true"}], "name": "http"}], "counter": {"packets": false, "bytes": false, "packetsLong": true, "bytesLong": true}, "alias": "FmAuto-App-Export-d87034eb-9590-4943-9001-9822e4f24f8f", "ipv4": {"totalLength": false, "fragmentation": {"flags": false, "id": false, "offset": false}, "protocol": true, "precedence": false, "tos": false, "section": {}, "destination": {"prefixMinMask": "/32"}, "dscp": false, "source": {"prefixMinMask": "/32"}, "ttl": false, "headerLen": false, "optionMap": false}, "ipv6": {"fragmentation": {"flags": false, "id": false, "offset": false}, "flowLabel": false, "precedence": false, "hopLimit": false, "section": {}, "destination": {"prefixMinMask": "/128"}, "trafficClass": false, "dscp": false, "source": {"prefixMinMask": "/128"}, "length": {"header": false, "total": false, "payload": false}, "nextHeader": true, "extensionMap": false}, "type": "export", "transport": {"icmp": {"ipv6Code": false, "ipv4Type": false, "ipv6Type": false, "ipv4Code": false}, "dstPort": true, "srcPort": true, "udp": {"dstPort": false, "srcPort": false, "msgLen": false}, "tcp": {"seqNumber": false, "srcPort": false, "windowSize": false, "headerLen": false, "flags": false, "urgentPtr": false, "dstPort": false, "ackNumber": false}}}
+
+2018-11-02 20:21:49,874: [INFO]: POST /api/v1/apps/metadata/exporters (10.115.181.191) Request Body:
+{"cef": {"activeTimeout": 1800, "inactiveTimeout": 15}, "applicationProfiles": ["FmAuto-App-Export-d87034eb-9590-4943-9001-9822e4f24f8f"], "source": {"ipInterface": "ExportOutInterf"}, "destination": {"ipv4Address": "10.22.1.1", "l4PortSrc": 23384, "l4PortDst": 514}, "snmp": {}, "alias": "FmAuto-Exporter-H-75e7aba0-0241-4f30-ba71-5b4692df746d", "netflow": {"templateType": "cohesive", "activeTimeout": 1800, "inactiveTimeout": 15, "templateRefresh": 1800, "version": "ipfix"}, "type": "netflow"}
+
+2018-11-02 20:21:50,170: [INFO]: POST /api/v1/apps/metadata/cache (10.115.181.191) Request Body:
+{"description": "", "alias": "FmAuto-Cache-HC2_-c4158fe8-bd24-4ae5-b9a5-ce6887d0f23c", "timeout": {"idle": 1800}, "flowBehavior": "bidir", "exporters": ["FmAuto-Exporter-H-75e7aba0-0241-4f30-ba71-5b4692df746d"], "match": {"ipv4": {"source": {"prefixMinMask": "/32"}, "destination": {"prefixMinMask": "/32"}, "protocol": true}, "transport": {"dstPort": true, "srcPort": true}, "ipv6": {"source": {"prefixMinMask": "/128"}, "destination": {"prefixMinMask": "/128"}, "nextHeader": true}}, "size": {"flows": 1}}
+
+2018-11-02 20:21:50,363: [INFO]: PUT /api/v1/apps/saApfProfiles/FmAuto-Sapf-HC2_A-c6a03463-fe28-497d-8d0d-d1307471b5fb (10.115.181.191) Request Body:
+{"alias": "FmAuto-Sapf-HC2_A-c6a03463-fe28-497d-8d0d-d1307471b5fb", "buffering": {"protocol": "tcpUdp", "enabled": true, "bufferCountBeforeMatch": 12}, "bidi": true, "timeout": 15, "sessionFields": [{"type": "fiveTuple", "pos": 2}]}
+
+2018-11-02 20:21:50,420: [INFO]: PATCH /api/v1/apps/metadata/applicationProfiles/FmAuto-App-pass-P-605fa8ca-a4d7-4a66-aec4-91358c426974 (10.115.181.191) Request Body:
+{"alias": "FmAuto-App-pass-P-605fa8ca-a4d7-4a66-aec4-91358c426974", "applications": [{"name": "dns"}, {"name": "facebook"}, {"name": "gmail"}, {"name": "http"}]}
+
+2018-11-02 20:21:50,682: [INFO]: PATCH /api/v1/maps/FmAuto-FmAuto-HC2-47dc08fe-30dd-429f-92a7-9efb24af645e (10.115.181.191) Request Body:
+{"encapTunnel": "", "gsop": "", "alias": "FmAuto-FmAuto-HC2-47dc08fe-30dd-429f-92a7-9efb24af645e", "rules": {"passRules": [{"matches": [{"mask": "0000.0000.0000", "type": "macSrc", "value": "0000.0000.0000"}], "bidi": false, "ruleId": 1}]}, "clusterId": "10.115.126.21", "dstPorts": ["FmAuto-Vport-HC2_-d854cc7f-bdea-4edd-81a7-7681bc31377f"], "subType": "byRule", "srcPorts": ["6/2/x1"], "type": "firstLevel"}
+
+2018-11-02 20:21:51,049: [INFO]: PATCH /api/v1/maps/FmAuto-FmAuto-HC2-e5733a89-6ce6-4373-8a8c-9018f1141ee6 (10.115.181.191) Request Body:
+{"encapTunnel": "", "gsop": "", "alias": "FmAuto-FmAuto-HC2-e5733a89-6ce6-4373-8a8c-9018f1141ee6", "clusterId": "10.115.126.21", "dstPorts": ["6/2/x15"], "subType": "byRule", "srcPorts": ["FmAuto-Vport-HC2_-d854cc7f-bdea-4edd-81a7-7681bc31377f"], "type": "secondLevel"}
+
+2018-11-02 20:21:51,471: [INFO]: PUT /api/v1/gsops/FmAuto-GSOP-HC2_A-d295d17d-2827-4c99-bd21-46295c1c3753 (10.115.181.191) Request Body:
+{"gsGroup": "GSGRP_65", "alias": "FmAuto-GSOP-HC2_A-d295d17d-2827-4c99-bd21-46295c1c3753", "gsApps": {"saApf": {"enabled": "enabled"}, "apf": {"enabled": "enabled"}, "metadataExport": {"cache": "FmAuto-Cache-HC2_-c4158fe8-bd24-4ae5-b9a5-ce6887d0f23c"}}}
+
+2018-11-02 20:21:51,888: [INFO]: PATCH /api/v1/maps/FmAuto-FmAuto-HC2-e5733a89-6ce6-4373-8a8c-9018f1141ee6 (10.115.181.191) Request Body:
+{"encapTunnel": "", "gsop": "FmAuto-GSOP-HC2_A-d295d17d-2827-4c99-bd21-46295c1c3753", "alias": "FmAuto-FmAuto-HC2-e5733a89-6ce6-4373-8a8c-9018f1141ee6", "apRules": {"passRules": [{"applicationProfile": "FmAuto-App-pass-P-605fa8ca-a4d7-4a66-aec4-91358c426974", "ruleId": 500}]}, "clusterId": "10.115.126.21", "dstPorts": ["6/2/x15"], "subType": "byRule", "srcPorts": ["FmAuto-Vport-HC2_-d854cc7f-bdea-4edd-81a7-7681bc31377f"], "type": "secondLevel"}
+
+2018-11-02 20:21:52,516: [INFO]: PATCH /api/v1/maps/FmAuto-FmAuto-HC2-e5733a89-6ce6-4373-8a8c-9018f1141ee6 (10.115.181.191) Request Body:
+{"gsRules": {"dropRules": [], "passRules": []}, "encapTunnel": "", "gsop": "FmAuto-GSOP-HC2_A-d295d17d-2827-4c99-bd21-46295c1c3753", "alias": "FmAuto-FmAuto-HC2-e5733a89-6ce6-4373-8a8c-9018f1141ee6", "apRules": {"passRules": [{"applicationProfile": "FmAuto-App-pass-P-605fa8ca-a4d7-4a66-aec4-91358c426974", "ruleId": 500}]}, "clusterId": "10.115.126.21", "dstPorts": ["6/2/x15"], "subType": "byRule", "srcPorts": ["FmAuto-Vport-HC2_-d854cc7f-bdea-4edd-81a7-7681bc31377f"], "type": "secondLevel"}
+
