@@ -2,7 +2,7 @@ import rest_api
 
 
 def driver_test (filename):
-    request_container = rest_api.rest_api_container(filename)
+    request_container = rest_api.container(filename)
     request_container.dump_container_list()
 
 

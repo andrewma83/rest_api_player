@@ -2,10 +2,10 @@ import requests
 import re
 
 request_method=["GET", "POST", "PATCH", "PULL", "DELETE"]
-tornado_info_pattern="([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}): \[([A-Z]{4,7})\]: ([A-Z]{3,7}) ([a-zA-Z0-9\/\-\_]+) \(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})\) Request Body:"
+tornado_info_pattern="([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}): \[(INFO|NOTICE)\]: (PATCH|PUT|POST|DELETE|GET) ([a-zA-Z0-9\/\-\_]+) \(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})\) Request Body:"
 tornado_request_body_pattern="([a-zA-Z0-9\"\-\_\[\]{}:,\.\/ ]+)"
 
-class rest_api_request:
+class request:
 
     def __init__(self, request_type, uri, data):
         self.request_type=request_type
@@ -13,7 +13,7 @@ class rest_api_request:
         self.data=data
 
 
-class rest_api_container:
+class container:
     def parse_file(self,filename):
         count = 0
         file_obj = open(filename, "r")
@@ -26,7 +26,7 @@ class rest_api_container:
             elif mod_count == 1:
                 request_data = line
             elif mod_count == 2:
-                request_obj = rest_api_request(request_type, request_uri, request_data)
+                request_obj = request(request_type, request_uri, request_data)
                 self.obj_list.append(request_obj)
 
             count = count + 1
@@ -41,7 +41,7 @@ class rest_api_container:
 
 
 
-class rest_api_http_comm:
+class http_connection:
 
     def __init__(self, host, username, password):
         self.host = host
