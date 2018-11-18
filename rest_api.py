@@ -2,7 +2,8 @@ import requests
 import re
 
 request_method=["GET", "POST", "PATCH", "PULL", "DELETE"]
-tornado_info_pattern="([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}): \[(INFO|NOTICE)\]: (PATCH|PUT|POST|DELETE|GET) ([a-zA-Z0-9\/\-\_]+) \(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})\) Request Body:"
+tornado_info_pattern= "([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}): \[(INFO|NOTICE)\]: " \
+                      "(PATCH|PUT|POST|DELETE|GET) ([a-zA-Z0-9\/\-\_]+) \(([0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3})\) Request Body:"
 tornado_request_body_pattern="([a-zA-Z0-9\"\-\_\[\]{}:,\.\/ ]+)"
 
 
@@ -92,7 +93,7 @@ class HTTPConn:
         rest_url = 'https://' + self.host + rest_uri
         response = requests.delete(rest_url, headers=headers)
 
-    def process_request(self, api_request):
+    def handle_request(self, api_request):
         switcher = {
             "GET": self.get,
             "POST": self.post,
@@ -103,4 +104,6 @@ class HTTPConn:
 
         return switcher[api_request.request_type](api_request.uri, api_request.data)
 
-
+    def handle_container(self, _container):
+        for api_request in _container.obj_list:
+            self.handle_request(api_request)
