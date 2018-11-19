@@ -1,5 +1,6 @@
 import requests
 import re
+import argparse
 
 request_method=["GET", "POST", "PATCH", "PULL", "DELETE"]
 tornado_info_pattern= "([0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2},[0-9]{3}): \[(INFO|NOTICE)\]: " \
@@ -107,3 +108,24 @@ class HTTPConn:
     def handle_container(self, _container):
         for api_request in _container.obj_list:
             self.handle_request(api_request)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="REST API log replayer")
+    parser.add_argument('-H', '--host', type=str, metavar='', required=True, help='Host/IP for device to test')
+    parser.add_argument('-u', '--username', type=str, metavar='', required=True, help='Credential (username) for the API request')
+    parser.add_argument('-p', '--password', type=str, metavar='', required=True, help='Credential (password) for the API request')
+    parser.add_argument('--infile', type=str, metavar='', required=True, help='Input logfile name for the API request')
+
+    cli_arg = parser.parse_args()
+
+    # execute only if run as a script
+    filename = cli_arg.infile
+    host=cli_arg.host
+    username=cli_arg.username
+    password=cli_arg.password
+
+    req_container = Container(filename)
+
+    device_to_test = HTTPConn(host, username, password)
+    device_to_test.handle_container(req_container)
