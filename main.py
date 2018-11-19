@@ -1,19 +1,22 @@
 import rest_api
+import argparse
 
 
-def driver_test (filename):
-    request_container = rest_api.Container(filename)
-    request_container.dump_container_list()
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="REST API log replayer")
+    parser.add_argument('-H', '--host', type=str, metavar='', required=True, help='Host/IP for device to test')
+    parser.add_argument('-u', '--username', type=str, metavar='', required=True, help='Credential (username) for the API request')
+    parser.add_argument('-p', '--password', type=str, metavar='', required=True, help='Credential (password) for the API request')
+    parser.add_argument('--infile', type=str, metavar='', required=True, help='Input logfile name for the API request')
 
+    cli_arg = parser.parse_args()
 
-if __name__ == "__main__":
     # execute only if run as a script
-    filename = "./tornado_config_log.test"
-    host="10.50.22.36"
-    username="admin"
-    password="admin123A!!"
+    filename = cli_arg.infile
+    host=cli_arg.host
+    username=cli_arg.username
+    password=cli_arg.password
 
-#    driver_test(filename)
     req_container = rest_api.Container(filename)
 
     device_to_test = rest_api.HTTPConn(host, username, password)
